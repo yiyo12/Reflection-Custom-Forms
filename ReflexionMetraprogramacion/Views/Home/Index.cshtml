@@ -1,0 +1,21 @@
+﻿@model Reflexion.Models.Reflection.IReflection
+
+@{
+
+    ViewData["Title"] = "Home Page";
+    // sirve para hacer una reflexion sobre un objeto
+    // getType tiene los tipo del modelo y get propietes obtiene los atributos de la clase en este caso name y age
+    System.Reflection.PropertyInfo[] lst = Model.GetType().GetProperties();
+}
+
+<div class="text-center">
+
+    @foreach (var oPropety in lst.OrderBy(obj => obj.Name)) //list al ser una lista podemos usar linq para hacer ordenamientos u otras cosas
+    {
+    <div>
+        <label>@oPropety.Name</label> <!--Esto contiene el nombre de las propiedades osea name y age-->
+        <input type="text" name="@oPropety.Name" value="@oPropety.GetValue(Model).ToString()"> <!--Esto contiene la data de un objeto previamente creado-->
+    </div>
+    }
+
+</div>
